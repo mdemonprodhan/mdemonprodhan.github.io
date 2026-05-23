@@ -462,8 +462,14 @@
 
   <p>© 2026 <strong>Md. Emon Prodhan</strong> · All Rights Reserved</p>
 </footer>
-
 <script>
+function filterPubs(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pub-card').forEach(c => {
+    c.style.display = (type === 'all' || c.dataset.type === type) ? 'flex' : 'none';
+  });
+}
 const toggle = document.getElementById('navToggle');
 const menu   = document.getElementById('mobileMenu');
 toggle.addEventListener('click', () => {
