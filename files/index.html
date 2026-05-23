@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home — Md. Emon Prodhan</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+
+/* ── TYPEWRITER ── */
+.typewriter-line {
+  display: flex; align-items: center; gap: 2px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--accent); margin-bottom: 1rem; min-height: 1.6em;
+}
+.tw-cursor {
+  display: inline-block; color: var(--gold);
+  animation: blink 0.75s step-end infinite;
+  font-style: normal; font-weight: 400;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── PARTICLE CANVAS ── */
+#particles {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink); border-radius: 2px; transition: all 0.3s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed;
+  top: 56px; left: 0; right: 0; z-index: 99;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+  flex-direction: column;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  text-decoration: none; color: var(--ink); font-size: 0.9rem;
+  font-weight: 500; padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid var(--rule); transition: color 0.2s;
+}
+.mobile-menu a:hover, .mobile-menu a.active { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: calc(100vh - 250px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.6fr;
+  align-items: center;
+  padding: 0 3rem;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 80% at 85% 50%, rgba(26,79,110,0.06) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c09a4a' fill-opacity='0.045'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-text { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  line-height: 1.12; color: var(--ink); margin-bottom: 1.1rem;
+}
+h1 em { color: var(--accent); font-style: italic; }
+
+.hero-bio {
+  font-size: 1.02rem; color: var(--muted); max-width: 48ch;
+  margin-bottom: 1.0rem; font-weight: 300; line-height: 1.85;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.hero-divider { width: 100%; height: 1px; background: var(--rule); margin-bottom: 1.0rem; }
+.hero-stats { display: flex; gap: 0; }
+.stat-num {
+  font-family: 'Playfair Display', serif; font-size: 2.2rem;
+  color: var(--accent); display: block; line-height: 1;
+}
+.stat-label {
+  font-size: 0.76rem; color: var(--muted);
+  letter-spacing: 0.07em; margin-top: 0.3rem; display: block;
+}
+
+/* ── RIGHT COLUMN ── */
+.hero-right {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2rem;
+}
+
+.social-btn {
+  padding: 0.5rem 1.2rem; border: 1px solid var(--rule);
+  text-decoration: none; color: var(--muted); font-size: 0.76rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  transition: all 0.2s; font-weight: 500;
+}
+.social-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── GRADIENT RING ── */
+.pf-ring {
+  width: 230px; height: 230px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d7dd2, #1a5fa3, #58a6ff, #2d7dd2);
+  background-size: 300% 300%;
+  animation: ringRotate 3s linear infinite;
+  padding: 3px;
+}
+@keyframes ringRotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.pf-ring-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: #f8f5ef; overflow: hidden;
+}
+.pf-ring-inner img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+
+/* ── EXPERTISE ── */
+.expertise { background: var(--card); border-top: 1px solid var(--rule); }
+.expertise-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--rule);
+}
+.exp-card { background: var(--card); padding: 2.5rem 2rem; transition: background 0.2s; }
+.exp-card:hover { background: #faf8f4; }
+.exp-num {
+  font-family: 'Playfair Display', serif; font-size: 3rem;
+  color: var(--rule); line-height: 1; margin-bottom: 1rem;
+}
+.exp-title {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem;
+  color: var(--accent); margin-bottom: 0.6rem;
+}
+.exp-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+/* ── DESKTOP NAV (keep hidden on mobile) ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+}
+
+/* ── MOBILE HERO ── */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 1.8rem 1.2rem 2rem;
+    gap: 0;
+    text-align: center;
+  }
+
+  /* photo on top */
+  .hero-right { order: -1; gap: 1rem; margin-bottom: 1.6rem; }
+  .pf-ring { width: 150px; height: 150px; }
+
+  /* social buttons under photo */
+  .hero-social { flex-wrap: wrap; justify-content: center; gap: 0.5rem !important; }
+  .social-btn { font-size: 0.7rem; padding: 0.4rem 0.9rem; }
+
+  /* text adjustments */
+  .hero-eyebrow { justify-content: center; }
+  .hero-bio { max-width: 100%; font-size: 0.9rem; }
+  .hero-btns { justify-content: center; }
+
+  /* hide divider + stats on very small — keep them if there's room */
+  .hero-divider { margin-bottom: 0.7rem; }
+  .hero-stats { justify-content: center; gap: 2rem; }
+  .stat-num { font-size: 1.6rem; }
+}
+
+/* ── MOBILE EXPERTISE ── */
+@media (max-width: 768px) {
+  .expertise-grid { grid-template-columns: 1fr; }
+  .exp-card { padding: 1.5rem 1.2rem; }
+  .exp-num { font-size: 2rem; margin-bottom: 0.5rem; }
+}
+
+/* ── MOBILE SECTION INNER ── */
+@media (max-width: 768px) {
+  .section-inner { padding: 2.5rem 1.2rem; }
+}
+
+/* ── FOOTER MOBILE ── */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column !important;
+    text-align: center; gap: 0.6rem;
+    padding: 1.2rem 1rem;
+  }
+  .footer-social { justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  h1 { font-size: 1.6rem; }
+  .btn { padding: 0.5rem 1rem; font-size: 0.76rem; }
+  .pf-ring { width: 120px; height: 120px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">MEP</a>
+  <div class="nav-pill"><ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DROPDOWN MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">Home</a>
+  <a href="about.html">About</a>
+  <a href="research.html">Research</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="particles"></canvas>
+    <div class="hero-text fade-up fade-up-1">
+      <p class="hero-eyebrow">Statistician &amp; Researcher</p>
+      <h1>Hello, I'm<br /><em>Md. Emon Prodhan</em></h1>
+      <div class="typewriter-line"><span id="tw"></span><span class="tw-cursor">|</span></div>
+      <p class="hero-bio">
+        Early-career researcher with a strong background in public health and social science.
+        Pursuing M.Sc. Statistics at SUST, specialising in statistical modelling,
+        machine learning, and evidence-informed research.
+      </p>
+      <div class="hero-btns">
+        <a href="research.html" class="btn btn-primary">View My Work</a>
+        <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+        <a href="mdemonprodhan_18May.pdf" download class="btn btn-outline">Download CV</a>
+      </div>
+    </div>
+
+    <div class="hero-right fade-up fade-up-2">
+      <div class="profile-wrap">
+        <div class="pf-ring">
+          <div class="pf-ring-inner">
+            <img src="profile.png" alt="Md. Emon Prodhan" />
+          </div>
+        </div>
+      </div>
+      <div class="hero-social" style="margin-top:0.1rem; display:flex; gap:0.75rem;">
+        <a href="https://linkedin.com/in/md-emon-prodhan/" class="social-btn" target="_blank">LinkedIn</a>
+        <a href="mailto:mdemonp10@gmail.com" class="social-btn">Email</a>
+        <a href="about.html" class="social-btn">About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section class="expertise">
+    <div class="section-inner">
+      <p class="section-label">What I Do</p>
+      <h2>Areas of Expertise</h2>
+      <div class="expertise-grid">
+        <div class="exp-card fade-up fade-up-1">
+          <div class="exp-num">01</div>
+          <div class="exp-title">Public Health Research</div>
+          <p class="exp-desc">Investigating child health outcomes, women's empowerment, WASH indicators, and population health through large-scale survey data (DHS, MICS, BDHS).</p>
+        </div>
+        <div class="exp-card fade-up fade-up-2">
+          <div class="exp-num">02</div>
+          <div class="exp-title">Machine Learning &amp; Deep Learning</div>
+          <p class="exp-desc">Applying classification, prediction, and time-series forecasting models to health and environmental datasets, including imbalanced data scenarios.</p>
+        </div>
+        <div class="exp-card fade-up fade-up-3">
+          <div class="exp-num">03</div>
+          <div class="exp-title">Statistical Analysis</div>
+          <p class="exp-desc">Advanced statistical modelling, multivariate analysis, regression, and complex survey data analysis using R, Python, SPSS, STATA, and SAS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-social">
+    <a href="mailto:mdemonp10@gmail.com" title="Email" aria-label="Email">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a1 1 0 0 0-.8.4L8 8.6l6.8-4.7A1 1 0 0 0 14 3.5H2zm13 1.2-5.9 4.1a1.5 1.5 0 0 1-1.7 0L1 4.7V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4.7z"/>
+      </svg>
+    </a>
+    <a href="https://linkedin.com/in/md-emon-prodhan/" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zM4.943 13.5V6H2.542v7.5h2.401zM3.743 4.967c.837 0 1.358-.554 1.358-1.248-.015-.709-.521-1.248-1.343-1.248-.822 0-1.358.54-1.358 1.248 0 .694.521 1.248 1.328 1.248h.015zM13.458 13.5v-4.185c0-2.243-1.196-3.285-2.792-3.285-1.287 0-1.863.709-2.183 1.208V6H6.082c.03.799 0 7.5 0 7.5h2.401V9.31c0-.223.016-.446.082-.605.18-.446.59-.907 1.278-.907.902 0 1.263.684 1.263 1.685V13.5h2.352z"/>
+      </svg>
+    </a>
+    <a href="https://www.researchgate.net/profile/Md-Emon-Prodhan" target="_blank" title="ResearchGate" aria-label="ResearchGate">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19.586 0H4.414A4.418 4.418 0 0 0 0 4.414v15.172A4.418 4.418 0 0 0 4.414 24h15.172A4.418 4.418 0 0 0 24 19.586V4.414A4.418 4.418 0 0 0 19.586 0zM9.34 18.122H6.77V5.878h5.194c3.287 0 5.21 1.74 5.21 4.654 0 2.124-1.03 3.605-2.883 4.227l3.14 3.363h-3.125l-2.71-3.055H9.34v3.055zm2.47-5.164c1.738 0 2.736-.788 2.736-2.263 0-1.45-.998-2.222-2.736-2.222H9.34v4.485h2.47z"/>
+      </svg>
+    </a>
+    <a href="https://scholar.google.com/citations?user=HPbRhwIAAAAJ&hl=en" target="_blank" title="Google Scholar" aria-label="Google Scholar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-15L0 4.5 12 0l12 4.5L12 9zm0 2c-3.313 0-6 2.687-6 6 0 .688.117 1.35.332 1.965L12 22l5.668-3.035A5.978 5.978 0 0 0 18 17c0-3.313-2.687-6-6-6z"/>
+      </svg>
+    </a>
+    <a href="https://orcid.org/0009-0000-9217-0661" target="_blank" title="ORCID" aria-label="ORCID">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm-4.75 6.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zm-1 4h2v7h-2v-7zm5 0h3.25c3 0 4.75 1.5 4.75 3.75S17.5 18 14.5 18H11.25v-7.5zm2 1.75v4h1c1.75 0 2.75-.75 2.75-2s-1-2-2.75-2h-1z"/>
+      </svg>
+    </a>
+  </div>
+  <p>© 2026 <strong>Md. Emon Prodhan</strong> · All Rights Reserved</p>
+</footer>
+
+<script>
+// ── HAMBURGER ──
+const toggle = document.getElementById('navToggle');
+const menu   = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('open');
+  menu.classList.toggle('open');
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  toggle.classList.remove('open');
+  menu.classList.remove('open');
+}));
+
+// ── TYPEWRITER ──
+const words = ['Public Health Researcher', 'Biostatistician', 'AI for Healthcare', 'Health Data Scientist'];
+let wi = 0, ci = 0, deleting = false;
+const twEl = document.getElementById('tw');
+function type() {
+  const word = words[wi];
+  twEl.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+  if (!deleting && ci > word.length) { deleting = true; setTimeout(type, 1400); return; }
+  if (deleting && ci < 0)           { deleting = false; wi = (wi + 1) % words.length; ci = 0; }
+  setTimeout(type, deleting ? 55 : 85);
+}
+type();
+
+// ── PARTICLES ──
+(function () {
+  const cv  = document.getElementById('particles');
+  const ctx = cv.getContext('2d');
+
+  function resize() {
+    cv.width  = cv.offsetWidth;
+    cv.height = cv.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // colour pulled from CSS --gold and --accent equivalents
+  const COLOUR = 'rgba(192,154,74,'; // gold tint to match the page theme
+
+  const COUNT  = 55;
+  const pts = Array.from({ length: COUNT }, () => ({
+    x:  Math.random() * cv.width,
+    y:  Math.random() * cv.height,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35,
+    r:  Math.random() * 1.8 + 0.8,
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+
+    // connect nearby dots
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = COLOUR + (0.18 * (1 - d / 120)) + ')';
+          ctx.lineWidth   = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw dots
+    pts.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = COLOUR + '0.55)';
+      ctx.fill();
+
+      // move
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > cv.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > cv.height) p.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

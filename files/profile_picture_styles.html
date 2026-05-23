@@ -1,0 +1,301 @@
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.wrap { padding: 1.5rem 0; }
+.section-heading { font-size: 13px; color: var(--color-text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+
+/* ── PROFILE DEMOS ── */
+.pf-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.pf-label { font-size: 12px; color: var(--color-text-secondary); }
+.pf-pick { font-size: 11px; color: var(--color-text-tertiary); }
+
+/* 1. Gradient ring */
+.pf-ring {
+  width: 110px; height: 110px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d7dd2, #1a5fa3, #0d3d6e);
+  padding: 3px; cursor: pointer;
+  transition: transform 0.3s;
+}
+.pf-ring:hover { transform: scale(1.05); }
+.pf-ring-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: #161b22;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 700; color: #2d7dd2;
+}
+
+/* 2. Hexagon clip */
+.pf-hex-wrap { width: 110px; height: 110px; cursor: pointer; }
+.pf-hex {
+  width: 110px; height: 110px;
+  background: #1c2230;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 700; color: #2d7dd2;
+  border: none; outline: 3px solid #2d7dd2;
+  outline-offset: -8px;
+  transition: transform 0.3s, clip-path 0.3s;
+}
+.pf-hex-wrap:hover .pf-hex { transform: rotate(30deg); }
+
+/* 3. Card style */
+.pf-card {
+  width: 90px; height: 110px; border-radius: 8px;
+  background: #1c2230; border: 1px solid #30363d;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 0.4rem; cursor: pointer;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.pf-card:hover { border-color: #2d7dd2; transform: translateY(-4px); }
+.pf-card-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #263045; border: 2px solid #2d7dd2;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; color: #2d7dd2;
+}
+.pf-card-name { font-size: 10px; color: #8b949e; text-align: center; padding: 0 4px; }
+
+/* 4. Glowing border */
+.pf-glow {
+  width: 110px; height: 110px; border-radius: 12px;
+  background: #1c2230;
+  border: 2px solid #2d7dd2;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 700; color: #2d7dd2;
+  cursor: pointer; position: relative;
+  transition: transform 0.3s;
+}
+.pf-glow:hover { transform: scale(1.04); }
+.glow-ring {
+  position: absolute; inset: -5px; border-radius: 16px;
+  border: 2px solid #2d7dd2; opacity: 0;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse { 0%,100%{opacity:0;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.04)} }
+
+/* 5. Stacked badge */
+.pf-stack { position: relative; width: 110px; height: 110px; cursor: pointer; }
+.pf-stack-main {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: #1c2230; border: 2px solid #30363d;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 700; color: #2d7dd2;
+  transition: transform 0.3s;
+}
+.pf-stack:hover .pf-stack-main { transform: scale(1.05); }
+.pf-stack-dot {
+  position: absolute; bottom: 4px; right: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #22c55e; border: 2px solid #161b22;
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-dot-inner { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+
+/* ── JS STYLE DEMOS ── */
+.js-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.js-card {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem 1.1rem;
+}
+.js-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.3rem; }
+.js-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 0.7rem; }
+.js-demo-btn {
+  font-size: 11px; padding: 4px 10px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  background: transparent; cursor: pointer;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  transition: all 0.2s;
+}
+.js-demo-btn:hover { background: var(--color-background-primary); color: var(--color-text-primary); }
+
+/* TYPEWRITER demo */
+#tw-demo { font-size: 13px; color: #2d7dd2; font-weight: 600; min-height: 18px; margin-bottom: 0.5rem; }
+/* Scroll reveal demo */
+.reveal-box {
+  height: 28px; background: #2d7dd2; border-radius: 4px;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.5s, transform 0.5s;
+  margin-bottom: 0.5rem; display: flex; align-items: center;
+  padding: 0 8px; font-size: 11px; color: #fff;
+}
+.reveal-box.shown { opacity: 1; transform: translateY(0); }
+/* Counter demo */
+#counter-val { font-size: 1.6rem; font-weight: 700; color: #2d7dd2; display: block; }
+/* Cursor trail demo */
+#trail-area {
+  height: 60px; border: 0.5px solid var(--color-border-tertiary);
+  border-radius: 4px; position: relative; overflow: hidden;
+  cursor: crosshair; margin-bottom: 0.5rem;
+  display: flex; align-items: center; justify-content: center;
+}
+#trail-hint { font-size: 11px; color: var(--color-text-tertiary); pointer-events: none; }
+.trail-dot {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%;
+  background: #2d7dd2; pointer-events: none;
+  animation: trailFade 0.8s forwards;
+}
+@keyframes trailFade { to { opacity:0; transform: scale(0); } }
+/* Tilt card demo */
+#tilt-card {
+  height: 60px; background: #1c2230; border-radius: 6px;
+  border: 1px solid #2d7dd2; display: flex; align-items: center;
+  justify-content: center; font-size: 11px; color: #8b949e;
+  cursor: pointer; transition: transform 0.1s; margin-bottom: 0.5rem;
+}
+/* Particle demo */
+#particle-canvas { width:100%; height:60px; display:block; }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Profile picture styles and JS animation options for portfolio</h2>
+
+ <div class="row">
+    <div class="pf-wrap">
+      <div class="pf-ring">
+        <div class="pf-ring-inner">
+	<img 
+        src="profile.png" 
+        alt="Profile" 
+        class="pf-image">
+	</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-heading">JS animation styles — click to preview</p>
+  <div class="js-grid">
+
+    <div class="js-card">
+      <div class="js-title">Typewriter effect</div>
+      <div class="js-desc">Cycles your roles — "Public Health", "Statistician", "ML Researcher" — letter by letter.</div>
+      <div id="tw-demo">Public Health|</div>
+      <button class="js-demo-btn" onclick="startTw()">Preview ↗</button>
+    </div>
+
+    <div class="js-card">
+      <div class="js-title">Scroll reveal</div>
+      <div class="js-desc">Cards and sections fade + slide up as the user scrolls into view.</div>
+      <div id="reveal-boxes">
+        <div class="reveal-box" id="rb1">Section 1</div>
+        <div class="reveal-box" id="rb2">Section 2</div>
+      </div>
+      <button class="js-demo-btn" onclick="doReveal()">Preview ↗</button>
+    </div>
+
+    <div class="js-card">
+      <div class="js-title">Animated counters</div>
+      <div class="js-desc">Stats count up from 0 when they scroll into view — great for publication numbers.</div>
+      <span id="counter-val">0</span>
+      <button class="js-demo-btn" onclick="doCounter()">Preview ↗</button>
+    </div>
+
+    <div class="js-card">
+      <div class="js-title">Cursor trail</div>
+      <div class="js-desc">Subtle blue dots trail the mouse across the hero section.</div>
+      <div id="trail-area"><span id="trail-hint">Move mouse here</span></div>
+      <button class="js-demo-btn" onclick="">Move mouse above ↑</button>
+    </div>
+
+    <div class="js-card">
+      <div class="js-title">3D tilt card</div>
+      <div class="js-desc">Profile card tilts slightly as you move your mouse over it — depth effect.</div>
+      <div id="tilt-card">Move mouse over me</div>
+      <button class="js-demo-btn" onclick="">Hover the card ↑</button>
+    </div>
+
+    <div class="js-card">
+      <div class="js-title">Particle background</div>
+      <div class="js-desc">Subtle floating dots in the hero background — minimal, not distracting.</div>
+      <canvas id="particle-canvas"></canvas>
+      <button class="js-demo-btn" onclick="">Auto-running ↑</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let twRunning = false;
+function startTw() {
+  if (twRunning) return; twRunning = true;
+  const words = ['Public Health','Statistician','ML Researcher','Data Scientist'];
+  let wi=0,ci=0,del=false;
+  const el = document.getElementById('tw-demo');
+  function step() {
+    const w = words[wi];
+    el.textContent = (del ? w.slice(0,ci--) : w.slice(0,ci++)) + '|';
+    if (!del && ci > w.length) { del=true; setTimeout(step,1100); return; }
+    if (del && ci < 0) { del=false; wi=(wi+1)%words.length; ci=0; }
+    setTimeout(step, del?55:85);
+  }
+  step();
+}
+startTw();
+
+function doReveal() {
+  ['rb1','rb2'].forEach((id,i) => {
+    setTimeout(() => document.getElementById(id).classList.add('shown'), i*220);
+  });
+  setTimeout(() => {
+    ['rb1','rb2'].forEach(id => document.getElementById(id).classList.remove('shown'));
+  }, 2000);
+}
+
+function doCounter() {
+  let v=0; const el=document.getElementById('counter-val');
+  const t = setInterval(()=>{ v+=1; el.textContent=v; if(v>=7){clearInterval(t);} }, 60);
+}
+
+const trail = document.getElementById('trail-area');
+trail.addEventListener('mousemove', e => {
+  const r = trail.getBoundingClientRect();
+  const d = document.createElement('div');
+  d.className = 'trail-dot';
+  d.style.left = (e.clientX - r.left - 4)+'px';
+  d.style.top  = (e.clientY - r.top  - 4)+'px';
+  trail.appendChild(d);
+  setTimeout(() => d.remove(), 800);
+  document.getElementById('trail-hint').style.opacity='0';
+});
+
+const tiltCard = document.getElementById('tilt-card');
+tiltCard.addEventListener('mousemove', e => {
+  const r = tiltCard.getBoundingClientRect();
+  const x = (e.clientX - r.left)/r.width  - 0.5;
+  const y = (e.clientY - r.top) /r.height - 0.5;
+  tiltCard.style.transform = `perspective(300px) rotateY(${x*14}deg) rotateX(${-y*10}deg)`;
+});
+tiltCard.addEventListener('mouseleave', () => { tiltCard.style.transform=''; });
+
+(function particles() {
+  const cv = document.getElementById('particle-canvas');
+  const ctx = cv.getContext('2d');
+  cv.width = cv.offsetWidth; cv.height = 60;
+  const pts = Array.from({length:18},()=>({
+    x: Math.random()*cv.width, y: Math.random()*cv.height,
+    vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
+    r: Math.random()*2+1
+  }));
+  function draw() {
+    ctx.clearRect(0,0,cv.width,cv.height);
+    pts.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>cv.width) p.vx*=-1;
+      if(p.y<0||p.y>cv.height) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(45,125,210,0.5)'; ctx.fill();
+    });
+    pts.forEach((a,i) => pts.slice(i+1).forEach(b => {
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<60){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(45,125,210,${0.15*(1-d/60)})`; ctx.lineWidth=0.5; ctx.stroke(); }
+    }));
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
