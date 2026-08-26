@@ -56,6 +56,7 @@
   .pub-accent.journal  { background: var(--accent); }
   .pub-accent.conference { background: var(--core); }
   .pub-accent.poster   { background: var(--muted); }
+  .pub-accent.oral   { background: var(--muted); }
   .pub-accent.project   { background: var(--more); }
 
   .pub-inner {
@@ -75,6 +76,7 @@
   .pub-type.journal   { color: var(--accent); }
   .pub-type.conference { color: var(--core); }
   .pub-type.poster    { color: var(--muted); }
+  .pub-type.oral    { color: var(--muted); }
   .pub-type.project   { color: var(--more); }
 
   .pub-title {
@@ -192,7 +194,7 @@
     <div style="max-width:1200px; margin:0 auto; padding-top:1rem;">
       <p class="section-label">Scholarly Work</p>
       <h1>Research</h1>
-      <p>Peer-reviewed articles, conference proceedings, poster presentations, and projects.</p>
+      <p>Peer-reviewed articles, conference proceedings, poster & oral presentations, and projects.</p>
     </div>
   </div>
 
@@ -206,7 +208,8 @@
           <button class="filter-btn" onclick="filterPubs('journal', this)">Journal Articles</button>
           <button class="filter-btn" onclick="filterPubs('conference', this)">Conferences</button>
           <button class="filter-btn" onclick="filterPubs('poster', this)">Posters</button>
-	  <button class="filter-btn" onclick="filterPubs('project', this)">Projects</button>
+		  <button class="filter-btn" onclick="filterPubs('oral', this)">ORAL PRESENTATIONS</button>
+	      <button class="filter-btn" onclick="filterPubs('project', this)">Projects</button>
         </div>
 
         <div class="pub-list" id="pubList">
@@ -369,13 +372,30 @@
               </div>
             </div>
           </div>	
-		
+	    <!-- ORAL 1 -->
+          <div class="pub-card" data-type="oral">
+            <div class="pub-accent oral"></div>
+            <div class="pub-inner">
+              <div class="pub-num">09</div>
+              <div class="pub-body">
+                <div class="pub-type oral">Oral Presentation · EFAST 2026</div>
+                <div class="pub-title">Impact of pesticide use on farmers' health in north-eastern Bangladesh</div>
+                <div class="pub-venue">International Conference on Emerging Frontiers in Advanced Sciences and Technologies, PUST, June 27–28, 2026 — <strong>Prodhan, M.E.</strong>, Miah, M.S., Ullah, M.O.</div>
+                <div class="pub-tags">
+                  <span class="pub-tag">Pesticide-related Illness</span>
+                  <span class="pub-tag">Agricultural Health Risk</span>
+                  <span class="pub-tag">Protective Equipment</span>
+                  <span class="pub-tag">Pesticide Safety Training</span>
+                </div>
+              </div>
+            </div>
+          </div>	
 
 	  <!-- PROJECT 1 -->
           <div class="pub-card" data-type="project">
             <div class="pub-accent project"></div>
             <div class="pub-inner">
-              <div class="pub-num">09</div>
+              <div class="pub-num">10</div>
               <div class="pub-body">
                 <div class="pub-type project">Project · STA430 · 2025</div>
                 <div class="pub-title">Determinants of Early Childhood Mortality in Bangladesh</div>
